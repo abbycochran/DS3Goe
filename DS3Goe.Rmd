@@ -1,0 +1,59 @@
+---
+title: "DS3Goe"
+author: "Abigail Cochran"
+date: "8/12/2019"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+First, I'll call the libraries that I may want to use for my analysis.
+```{r}
+#Call necessary libraries
+library(datasets)
+library(ggplot2)
+library(tidyverse)
+```
+
+Then I'll download the data, and take a quick look.
+```{r}
+#Call the IRIS dataset
+data(iris)
+
+#Summarize the dataset.
+summary(iris)
+```
+
+Great. Now let's figure something out. How about how the ratio of sepal length to width, and petal length to width differs across species. First, let's format the data as a dataframe.
+
+```{r}
+#Make Iris into a dataframe.
+dfiris <- as.data.frame(iris)
+
+#Take a quick look at data types
+str(dfiris)
+# All numerics and factors (for species), that's what we want.
+```
+
+Now let's manipulate the dataframe.
+
+```{r}
+# First get the ratio for sepals and petals per line, then group by species, then get the average ratios for each species.
+
+dfirismut <- dfiris %>%
+  mutate(sepal.ratio = Sepal.Length/Sepal.Width) %>%
+  mutate(petal.ratio = Petal.Length/Petal.Width) %>%
+  group_by(Species) %>%
+  mutate(sepal.lw.ratio.avg = mean(sepal.ratio)) %>%
+  mutate(petal.lw.ratio.avg = mean(petal.ratio))
+```
+
+This worked. I get what I want. The average sepal length/width raio is 1.470188 for setosa, 2.160402 for versicolor, and 2.230453 for virginica. The average petal length/width ratio is 6.908 for setosa, 3.242837 for versicolor, and 2.780662 for virginica. 
+
+For sepals: virginica > versicolor > setosa. 
+
+For petals: setosa > versicolor > verginica. 
+
+This leads me to believe that these measurements might have an inverse relationsihp. Cool!
