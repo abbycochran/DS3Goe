@@ -56,4 +56,4 @@ For sepals: virginica > versicolor > setosa.
 
 For petals: setosa > versicolor > verginica. 
 
-This leads me to believe that these measurements might have an inverse relationsihp. Super!
+This leads me to believe that these measurements might have an inverse relationship. Super!
